@@ -18,16 +18,6 @@ function App() {
     )
   }, [])
 
-
-  async function handleRemoveRepository(id) {
-    await api.delete(`repositories/${id}`);
-
-    const _REPO = repositories.filter(
-      repository => repository.id !== id
-    )
-    setRepositories(_REPO);
-  }
-
   async function handleAddRepository() {
     // TODO
     const project =  {
@@ -38,6 +28,15 @@ function App() {
     }
     const response = await api.post('/repositories', project);
     setRepositories([...repositories, response.data])
+  }
+  
+  async function handleRemoveRepository(id) {
+    await api.delete(`repositories/${id}`);
+
+    const _REPO = repositories.filter(
+      repository => repository.id !== id
+    )
+    setRepositories(_REPO);
   }
 
   return (
